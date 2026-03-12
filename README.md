@@ -34,3 +34,5 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+Para la renderización de las tarjetas, he priorizado el uso del componente estandarizado <Image> de Next.js en lugar de la etiqueta <img> nativa de HTML. Aunque esto requirió configurar explícitamente los remotePatterns en el next.config.mjs para dominios externos, es la práctica recomendada para garantizar la optimización automática de formatos (WebP), el lazy loading y la reducción del Core Web Vitals.
