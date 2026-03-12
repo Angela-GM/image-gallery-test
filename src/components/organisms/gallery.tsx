@@ -36,7 +36,7 @@ export const Gallery = () => {
 
   return (
     <div>
-      {photos.length > 0 && <PhotoGrid photos={photos} />}
+      {photos.length > 0 && <PhotoGrid onRemove={removePhoto} photos={photos} />}
 
       <div ref={observerTarget}></div>
 
