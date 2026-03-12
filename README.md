@@ -36,3 +36,11 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
 Para la renderización de las tarjetas, he priorizado el uso del componente estandarizado <Image> de Next.js en lugar de la etiqueta <img> nativa de HTML. Aunque esto requirió configurar explícitamente los remotePatterns en el next.config.mjs para dominios externos, es la práctica recomendada para garantizar la optimización automática de formatos (WebP), el lazy loading y la reducción del Core Web Vitals.
+
+
+
+USO DE LA IA
+Gemini Chat: se utilizó como asistente para la resolución de dudas sobre la implementación de componentes en Next.js y la estructura del proyecto.
+
+Antigravity: se utilizó para predicciones de código.
+
