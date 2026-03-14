@@ -8,6 +8,7 @@ export const usePhotos = () => {
 
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
+  const [retryCount, setRetryCount] = useState(0);
 
   useEffect(() => {
     const fetchPhotos = async (currentPage: number) => {
@@ -54,7 +55,7 @@ export const usePhotos = () => {
     if (hasMore) {
       fetchPhotos(page);
     }
-  }, [page, hasMore]);
+  }, [page, hasMore, retryCount]);
 
   const loadMore = useCallback(() => {
     if (!isLoading && hasMore) {
@@ -62,11 +63,16 @@ export const usePhotos = () => {
     }
   }, [isLoading, hasMore]);
 
+  const retry = useCallback(() => {
+    setError(null);
+    setRetryCount((c) => c + 1);
+  }, []);
+
   const removePhoto = useCallback((id: number) => {
     setPhotos((currentPhotos) =>
       currentPhotos.filter((photo) => photo.id !== id),
     );
   }, []);
 
-  return { photos, isLoading, error, removePhoto, loadMore, hasMore };
+  return { photos, isLoading, error, removePhoto, loadMore, hasMore, retry };
 };
