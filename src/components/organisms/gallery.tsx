@@ -39,7 +39,7 @@ export const Gallery = () => {
       className="flex flex-col min-h-screen"
       style={{ overflowAnchor: "none" } as React.CSSProperties}
     >
-      <div className="flex-1">
+      <div id="gallery-container" tabIndex={-1} className="flex-1 outline-none">
         {photos.length > 0 && (
           <PhotoGrid onRemove={removePhoto} photos={photos} />
         )}
@@ -55,7 +55,6 @@ export const Gallery = () => {
         ref={observerTarget}
         className="h-40 w-full flex items-center justify-center"
       >
-        {/* {isLoading && <Loader text="Cargando más fotos..." />} */}
         {isLoading && <Spinner />}
       </div>
 

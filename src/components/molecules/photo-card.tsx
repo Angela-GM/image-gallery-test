@@ -13,22 +13,46 @@ const PhotoCardComponent = ({ photo, onRemove }: PhotoCardProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
 
-  const handleRemove = () => {
+  const handleRemove = (byKeyboard = false) => {
     if (isDeleting) return;
+
     setIsDeleting(true);
     onRemove(photo.id);
+
+    // Solo movemos el foco cuando la acción viene del teclado
+    if (byKeyboard) {
+      const currentCard = document.getElementById(`card-${photo.id}`);
+      const motionWrapper = currentCard?.parentElement;
+      const nextWrapper = motionWrapper?.nextElementSibling as HTMLElement;
+      const prevWrapper = motionWrapper?.previousElementSibling as HTMLElement;
+
+      setTimeout(() => {
+        const nextTarget =
+          nextWrapper?.querySelector<HTMLElement>("[role='button']") ||
+          prevWrapper?.querySelector<HTMLElement>("[role='button']");
+
+        if (nextTarget) {
+          nextTarget.focus();
+        } else {
+          document.getElementById("gallery-container")?.focus();
+        }
+      }, 150);
+    }
   };
-  // funcion borrar por teclado
   const handleKeyDown = (e: React.KeyboardEvent<HTMLElement>) => {
     if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
-      handleRemove();
+      handleRemove(true); // indica que viene del teclado
     }
   };
 
   return (
     <article
-      onClick={handleRemove}
+      id={`card-${photo.id}`}
+      onClick={(e) => {
+        e.stopPropagation();
+        handleRemove();
+      }}
       onKeyDown={handleKeyDown}
       tabIndex={0}
       role="button"
@@ -48,7 +72,7 @@ const PhotoCardComponent = ({ photo, onRemove }: PhotoCardProps) => {
         loading="lazy"
         className={`object-cover w-full h-full transition-opacity duration-500 ease-in-out ${
           isLoaded ? "opacity-100" : "opacity-0"
-        }`} // onError={() => setImageError(true)}
+        }`}
       />
     </article>
   );
