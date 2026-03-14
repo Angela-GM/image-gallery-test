@@ -19,7 +19,6 @@ const PhotoCardComponent = ({ photo, onRemove }: PhotoCardProps) => {
     setIsDeleting(true);
     onRemove(photo.id);
 
-    // Solo movemos el foco cuando la acción viene del teclado
     if (byKeyboard) {
       const currentCard = document.getElementById(`card-${photo.id}`);
       const motionWrapper = currentCard?.parentElement;
@@ -42,7 +41,7 @@ const PhotoCardComponent = ({ photo, onRemove }: PhotoCardProps) => {
   const handleKeyDown = (e: React.KeyboardEvent<HTMLElement>) => {
     if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
-      handleRemove(true); // indica que viene del teclado
+      handleRemove(true);
     }
   };
 

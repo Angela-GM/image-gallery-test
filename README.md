@@ -17,8 +17,8 @@ Este proyecto es una aplicación de galería de fotos con scroll infinito, desar
 
 El proyecto sigue los principios de **Atomic Design** para organizar la interfaz de usuario de manera jerárquica y modular, facilitando la reutilización de componentes:
 
-- **Atoms:** Componentes mínimos (`Spinner`, `Button`, `ErrorMessage`).
-- **Molecules:** Combinación de átomos (`PhotoCard`).
+- **Atoms:** Componentes mínimos (`Spinner`, `ButtonPrimary`).
+- **Molecules:** Combinación de átomos (`PhotoCard`, `ErrorMessage`).
 - **Organisms:** Secciones complejas (`PhotoGrid`, `Gallery`).
 - **Hooks:** Extracción de lógica de negocio (`usePhotos`) para facilitar el mantenimiento y testing.
 
@@ -36,6 +36,7 @@ Para manejar grandes volúmenes de datos sin degradar el rendimiento del navegad
 
 - **Memoización:** Uso estratégico de `React.memo` en los componentes de tarjeta y `useCallback` en los manejadores de eventos para evitar re-renderizados innecesarios de elementos existentes al cargar nuevas páginas.
 - **Gestión de Imágenes:** Uso del componente `Image` de Next.js para implementar **Lazy Loading nativo**, asegurando que solo las imágenes visibles consuman memoria y ancho de banda.
+- **Estrategia de Reintento (Retry):** Implementación de una lógica de reintento en el hook `usePhotos` que permite recargar específicamente la página que falló sin duplicar datos ni saltar páginas.
 
 ### 3. Animaciones con Framer Motion
 
@@ -85,6 +86,7 @@ npm run test:watch  # Modo observación
 ## ♿ Accesibilidad (a11y)
 
 - **Navegación:** Soporte completo para navegación por teclado (`Tab`, `Space`, `Enter`).
+- **Gestión Inteligente del Foco:** Al eliminar una imagen mediante el teclado, la aplicación detecta la posición del elemento y desplaza automáticamente el foco a la siguiente tarjeta (o a la anterior si es la última). Esto evita que el foco se pierda en el `body`, mejorando la fluidez para usuarios de lectores de pantalla.
 - **Semántica:** Uso de etiquetas HTML5 semánticas (`article`, `section`, `button`).
 - **Lectores de Pantalla:** Atributos `aria-label` descriptivos para acciones dinámicas y `aria-live` para estados de carga.
 
