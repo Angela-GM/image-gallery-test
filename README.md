@@ -2,6 +2,10 @@
 
 Este proyecto es una aplicación de galería de imágenes con scroll infinito. Se ha puesto especial énfasis en la **Clean Architecture**, el rendimiento del DOM y una experiencia de usuario (UX) fluida y accesible.
 
+## 🔗 Demo en Vivo
+Puedes ver la aplicación desplegada en: [https://image-gallery-test.vercel.app/](https://image-gallery-test.vercel.app/)
+
+
 ## 🛠️ Stack Tecnológico & Justificación
 
 - **Next.js 16.1.6 (App Router):** Elegido por su manejo eficiente de _Server Components_, optimización nativa de imágenes y un sistema de enrutamiento robusto que facilita la escalabilidad.
@@ -66,12 +70,19 @@ npm run start:full
    ```
    La aplicación estará disponible en `http://localhost:3000`
 
-3. **Ejecutar en modo producción:**
-   ```bash
-   npm run build
-   npm run start
-   ```
    La aplicación estará disponible en `http://localhost:3000`
+
+### 🔑 Variables de Entorno
+La aplicación utiliza una variable para centralizar el endpoint de la API. **No es obligatorio configurar nada** para que el proyecto funcione, ya que existe un valor por defecto automatizado.
+
+Si deseas cambiar la fuente de datos, crea un archivo `.env` en la raíz:
+
+```env
+NEXT_PUBLIC_ENDPOINT_BASE="https://jsonplaceholder.typicode.com"
+```
+
+> [!TIP]
+> El proyecto está diseñado para funcionar "out-of-the-box". Si el archivo `.env` no existe, se usará automáticamente el endpoint de JSONPlaceholder.
 
 
 
