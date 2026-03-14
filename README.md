@@ -1,46 +1,111 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Galería de Fotos - Challenge EY 🚀
 
-## Getting Started
+Este proyecto es una aplicación de galería de fotos con scroll infinito, desarrollada como parte de una prueba técnica para EY. Se ha puesto especial énfasis en la **Clean Architecture**, el rendimiento del DOM y una experiencia de usuario (UX) fluida y accesible.
 
-First, run the development server:
+## 🛠️ Stack Tecnológico & Justificación
+
+- **Next.js 16.1.6 (App Router):** Elegido por su manejo eficiente de _Server Components_, optimización nativa de imágenes y un sistema de enrutamiento robusto que facilita la escalabilidad.
+- **React 19.2.3:** Uso de las últimas capacidades de la librería para una gestión de estado más eficiente y una mejor integración con componentes asíncronos.
+- **TypeScript 5:** Fundamental para garantizar la integridad de los datos, facilitar el mantenimiento y reducir errores en tiempo de ejecución mediante un tipado estricto.
+- **Tailwind CSS 4:** Utilizado para un desarrollo de UI ágil y consistente, permitiendo un diseño responsivo sin generar archivos CSS pesados.
+- **Framer Motion 12:** Seleccionada por su capacidad de manejar animaciones complejas (como el reordenamiento de layouts) mediante aceleración por hardware, garantizando 60 FPS.
+- **Jest 30 + React Testing Library 16:** El estándar de la industria para asegurar que la lógica de negocio y la interacción del usuario funcionen según lo previsto.
+
+---
+
+## 🏗️ Arquitectura: Atomic Design
+
+El proyecto sigue los principios de **Atomic Design** para organizar la interfaz de usuario de manera jerárquica y modular, facilitando la reutilización de componentes:
+
+- **Atoms:** Componentes mínimos (`Spinner`, `Button`, `ErrorMessage`).
+- **Molecules:** Combinación de átomos (`PhotoCard`).
+- **Organisms:** Secciones complejas (`PhotoGrid`, `Gallery`).
+- **Hooks:** Extracción de lógica de negocio (`usePhotos`) para facilitar el mantenimiento y testing.
+
+## 🚀 Decisiones de Arquitectura y Rendimiento
+
+### 1. Gestión del DOM y Scroll Infinito
+
+Para manejar grandes volúmenes de datos sin degradar el rendimiento del navegador:
+
+- **Intersection Observer:** Implementado para detectar el final de la página y cargar datos de forma proactiva. Se utiliza un `rootMargin` de 400px para anticipar la carga antes de que el usuario llegue al fondo.
+- **Scroll Anchoring:** Uso de la propiedad CSS `overflow-anchor: none` para estabilizar el viewport y evitar saltos bruscos ("rebotes") cuando se inyectan nuevos elementos.
+- **Estabilidad de Layout:** Las tarjetas de fotos utilizan contenedores con ratio de aspecto fijo (`aspect-square`) para reservar el espacio antes de que la imagen se descargue, eliminando el _Cumulative Layout Shift_ (CLS).
+
+### 2. Optimizaciones de Renderizado
+
+- **Memoización:** Uso estratégico de `React.memo` en los componentes de tarjeta y `useCallback` en los manejadores de eventos para evitar re-renderizados innecesarios de elementos existentes al cargar nuevas páginas.
+- **Gestión de Imágenes:** Uso del componente `Image` de Next.js para implementar **Lazy Loading nativo**, asegurando que solo las imágenes visibles consuman memoria y ancho de banda.
+
+### 3. Animaciones con Framer Motion
+
+Se optó por **Framer Motion** para gestionar las transiciones de la cuadrícula. La propiedad `layout` permite que los elementos restantes se reorganicen suavemente al eliminar una foto, utilizando aceleración por hardware para mantener una tasa constante de 60 FPS.
+
+---
+
+
+## 🛠️ Cómo arrancar el proyecto
+
+Sigue estos pasos para ejecutar la aplicación en tu entorno local:
+
+1. **Instalar dependencias:**
+   ```bash
+   npm install
+   ```
+2. **Ejecutar en modo desarrollo:**
+   ```bash
+   npm run dev
+   ```
+   La aplicación estará disponible en `http://localhost:3000`
+
+3. **Ejecutar en modo producción:**
+   ```bash
+   npm run build
+   npm run start
+   ```
+
+   La aplicación estará disponible en `http://localhost:3000`
+
+
+
+## 🧪 Testing (Unitarios e Integración)
+
+Se han implementado pruebas para cubrir tanto la lógica individual como el flujo de datos:
+
+- **Tests Unitarios (`photo-card.test.tsx`):** Verificación del renderizado correcto de props, accesibilidad (alt text) y ejecución de eventos de borrado.
+- **Tests de Integración (`gallery.test.tsx`):** Validación de la orquestación entre el Custom Hook (`usePhotos`) y la UI, comprobando la transición entre estados de carga (Spinner) y la visualización de resultados.
+
+**Para ejecutar la suite de pruebas:**
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run test        # Ejecutar tests
+npm run test:watch  # Modo observación
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ♿ Accesibilidad (a11y)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Navegación:** Soporte completo para navegación por teclado (`Tab`, `Space`, `Enter`).
+- **Semántica:** Uso de etiquetas HTML5 semánticas (`article`, `section`, `button`).
+- **Lectores de Pantalla:** Atributos `aria-label` descriptivos para acciones dinámicas y `aria-live` para estados de carga.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🤖 Uso de Inteligencia Artificial (IA)
 
-To learn more about Next.js, take a look at the following resources:
+De acuerdo con los requisitos de la prueba, este proyecto ha contado con el apoyo de herramientas de IA, integradas en el flujo de trabajo de la siguiente manera:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **GitHub Copilot:** Utilizado en el IDE principalmente para la predicción de texto y autocompletado de código repetitivo, agilizando el desarrollo mecánico.
+- **Chat Gemini como Consultor Senior:** Se ha empleado una IA generativa como consejera para organizar la arquitectura del proyecto, plantear la estructura de la prueba de la mejor forma posible y resolver bloqueos técnicos complejos además de ayudarme a redactar el README.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**Responsabilidad y Supervisión:**
+Es importante destacar que **todo el código y las soluciones propuestas han sido revisados, probados y validados por mí**. La IA ha servido como apoyo estratégico, pero la comprensión profunda de la lógica implementada, la corrección de errores de renderizado y la validación de los tests han sido ejecutadas bajo mi supervisión directa, asegurando que cada línea de código cumple con los estándares requeridos.
 
-## Deploy on Vercel
+**Aportaciones clave:**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-
-Para la renderización de las tarjetas, he priorizado el uso del componente estandarizado <Image> de Next.js en lugar de la etiqueta <img> nativa de HTML. Aunque esto requirió configurar explícitamente los remotePatterns en el next.config.mjs para dominios externos, es la práctica recomendada para garantizar la optimización automática de formatos (WebP), el lazy loading y la reducción del Core Web Vitals.
-
+1. **Arquitectura:** Organización de la lógica mediante Custom Hooks y patrones de diseño limpios.
+2. **Debugging de Layout:** Resolución de problemas de _Reflow_ y parpadeos visuales durante el scroll infinito masivo.
+3. **Testing:** Configuración del entorno de Jest y creación de mocks para APIs del navegador (como `IntersectionObserver`).
+4. **Optimización:** Implementación de estrategias de reconciliación del Virtual DOM para mejorar la fluidez.
 
 
-USO DE LA IA
-Gemini Chat: se utilizó como asistente para la resolución de dudas sobre la implementación de componentes en Next.js y la estructura del proyecto.
-
-Antigravity: se utilizó para predicciones de código.
 
