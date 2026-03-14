@@ -30,18 +30,16 @@ describe("PhotoCard component", () => {
     expect(image).toHaveAttribute("src", "https://example.com/photo.jpg");
   });
 
-  it('should call onRemove after the 500ms animation when clicked', () => {
+  it("should call onRemove immediately when clicked (managed by Framer Motion)", () => {
     render(<PhotoCard photo={mockPhoto} onRemove={mockOnRemove} />);
 
-    const card = screen.getByRole('button', {name: /Eliminar imagen test photo title/i});
+    const card = screen.getByRole("button", {
+      name: /eliminar imagen test photo title/i,
+    });
+
     fireEvent.click(card);
-
-    expect(mockOnRemove).not.toHaveBeenCalled();
-
-    jest.advanceTimersByTime(500);
 
     expect(mockOnRemove).toHaveBeenCalledTimes(1);
     expect(mockOnRemove).toHaveBeenCalledWith(100);
-
-  })
+  });
 });

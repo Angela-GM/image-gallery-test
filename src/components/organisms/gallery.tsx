@@ -1,7 +1,6 @@
 "use client";
 
 import { usePhotos } from "@/hooks/usePhotos";
-import { Loader } from "../atoms/loader";
 import { ErrorMessage } from "../atoms/error-message";
 import { PhotoGrid } from "./photo-grid";
 import { useEffect, useRef } from "react";
