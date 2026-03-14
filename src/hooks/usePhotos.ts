@@ -12,7 +12,7 @@ export const usePhotos = () => {
   const fetchPhotos = async (currentPage: number) => {
     try {
       const response = await fetch(
-        `https://jsonplaceholder.typicode.com/photos?_page=${currentPage}&_limit=50`,
+        `https://jsonplaceholder.typicode.com/photos?_page=${currentPage}&_limit=20`,
       );
 
       if (!response.ok) {
@@ -61,9 +61,9 @@ export const usePhotos = () => {
     }
   }, [isLoading, hasMore]);
 
-  const removePhoto = (id: number) => {
+  const removePhoto = useCallback((id: number) => {
     setPhotos((currentPhotos) => currentPhotos.filter((photo) => photo.id !== id));
-  };
+  }, []);
 
   return { photos, isLoading, error, removePhoto, loadMore, hasMore };
 };

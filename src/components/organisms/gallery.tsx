@@ -19,7 +19,7 @@ export const Gallery = () => {
           loadMore();
         }
       },
-      { threshold: 0.5 },
+      { rootMargin: "600px", threshold: 0.5 },
     );
 
     if (observerTarget.current) {

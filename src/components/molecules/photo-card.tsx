@@ -2,14 +2,14 @@
 
 import Image from "next/image";
 import { Photo } from "@/types/photo";
-import { useState } from "react";
+import { memo, useState } from "react";
 
 interface PhotoCardProps {
   photo: Photo;
   onRemove: (id: number) => void;
 }
 
-export const PhotoCard = ({ photo, onRemove }: PhotoCardProps) => {
+export const PhotoCardComponent = ({ photo, onRemove }: PhotoCardProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const handleRemove = () => {
     onRemove(photo.id);
@@ -36,7 +36,7 @@ export const PhotoCard = ({ photo, onRemove }: PhotoCardProps) => {
         onLoad={() => setIsLoaded(true)}
         width={600}
         height={600}
-        className={`object-cover w-full h-full transition-opacity duration-700 ease-in-out ${
+        className={`object-cover w-full h-full transition-opacity duration-500 ease-in-out ${
           isLoaded ? "opacity-100" : "opacity-0"
         }`} // onError={() => setImageError(true)}
       />
@@ -48,3 +48,5 @@ export const PhotoCard = ({ photo, onRemove }: PhotoCardProps) => {
     </article>
   );
 };
+
+export const PhotoCard = memo(PhotoCardComponent)
