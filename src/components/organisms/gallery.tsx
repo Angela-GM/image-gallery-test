@@ -35,15 +35,24 @@ export const Gallery = () => {
   if (error && photos.length === 0) return <ErrorMessage message={error} />;
 
   return (
-    <div>
-      {photos.length > 0 && <PhotoGrid onRemove={removePhoto} photos={photos} />}
+    <div className="flex flex-col min-h-screen">
+      {/* Usamos un contenedor con altura mínima para que el footer no suba de golpe */}
+      <div className="flex-1">
+        {photos.length > 0 && (
+          <PhotoGrid onRemove={removePhoto} photos={photos} />
+        )}
+      </div>
 
-      <div ref={observerTarget}></div>
+      {/* El sensor debe estar SIEMPRE en el DOM, no condicionado por el loading */}
+      <div
+        ref={observerTarget}
+        className="h-20 w-full flex items-center justify-center my-4"
+      >
+        {isLoading && <Loader text="Cargando..." />}
+      </div>
 
-      {isLoading && <Loader text="Cargando fotos..." />}
-
-      {!hasMore && photos.length > 0 && (
-        <ErrorMessage message="No se encontraron más fotos" />
+      {!hasMore && (
+        <div className="p-8 text-center text-gray-500">Fin de la galería</div>
       )}
     </div>
   );

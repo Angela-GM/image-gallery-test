@@ -47,6 +47,7 @@ const PhotoCardComponent = ({ photo, onRemove }: PhotoCardProps) => {
         onLoad={() => setIsLoaded(true)}
         width={600}
         height={600}
+        loading="lazy"
         className={`object-cover w-full h-full transition-opacity duration-500 ease-in-out ${
           isLoaded ? "opacity-100" : "opacity-0"
         }`} // onError={() => setImageError(true)}
