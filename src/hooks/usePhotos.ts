@@ -11,6 +11,7 @@ export const usePhotos = () => {
 
   useEffect(() => {
     const fetchPhotos = async (currentPage: number) => {
+      setIsLoading(true);
       try {
         const response = await fetch(
           `https://jsonplaceholder.typicode.com/photos?_page=${currentPage}&_limit=20`,

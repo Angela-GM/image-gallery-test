@@ -16,9 +16,7 @@ const PhotoCardComponent = ({ photo, onRemove }: PhotoCardProps) => {
   const handleRemove = () => {
     if (isDeleting) return;
     setIsDeleting(true);
-    setTimeout(() => {
-      onRemove(photo.id);
-    }, 500);
+    onRemove(photo.id);
   };
   // funcion borrar por teclado
   const handleKeyDown = (e: React.KeyboardEvent<HTMLElement>) => {
@@ -35,7 +33,7 @@ const PhotoCardComponent = ({ photo, onRemove }: PhotoCardProps) => {
       tabIndex={0}
       role="button"
       aria-label={`Eliminar imagen ${photo.title}`}
-      className={`group relative rounded-lg overflow-hidden shadow-sm hover:shadow-md cursor-pointer focus:outline-none focus:ring-4 focus:ring-blue-500 bg-gray-100 aspect-square transition-all duration-500 transform ${
+      className={`group relative rounded-lg overflow-hidden shadow-sm hover:shadow-md cursor-pointer focus:outline-none focus:ring-4 focus:ring-red-600 focus:border-3 bg-gray-200 aspect-square transition-all duration-500 transform ${
         isDeleting
           ? "scale-0 opacity-0"
           : "scale-100 opacity-100 hover:scale-105"
