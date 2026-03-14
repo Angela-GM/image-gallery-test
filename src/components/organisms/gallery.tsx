@@ -36,7 +36,7 @@ export const Gallery = () => {
 
   return (
     <div
-      className="flex flex-col min-h-screen"
+      className="container mx-auto flex flex-col min-h-screen"
       style={{ overflowAnchor: "none" } as React.CSSProperties}
     >
       <div id="gallery-container" tabIndex={-1} className="flex-1 outline-none">

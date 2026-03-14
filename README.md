@@ -49,6 +49,13 @@ Se optó por **Framer Motion** para gestionar las transiciones de la cuadrícula
 
 Sigue estos pasos para ejecutar la aplicación en tu entorno local:
 
+### 🚀 Opción Recomendada (Un solo paso)
+Para instalar dependencias, construir y arrancar el proyecto de una sola vez:
+```bash
+npm run start:full
+```
+
+### 🛠️ Otras opciones
 1. **Instalar dependencias:**
    ```bash
    npm install
@@ -64,7 +71,6 @@ Sigue estos pasos para ejecutar la aplicación en tu entorno local:
    npm run build
    npm run start
    ```
-
    La aplicación estará disponible en `http://localhost:3000`
 
 
@@ -86,7 +92,7 @@ npm run test:watch  # Modo observación
 ## ♿ Accesibilidad (a11y)
 
 - **Navegación:** Soporte completo para navegación por teclado (`Tab`, `Space`, `Enter`).
-- **Gestión Inteligente del Foco:** Al eliminar una imagen mediante el teclado, la aplicación detecta la posición del elemento y desplaza automáticamente el foco a la siguiente tarjeta (o a la anterior si es la última). Esto evita que el foco se pierda en el `body`, mejorando la fluidez para usuarios de lectores de pantalla.
+- **Gestión Inteligente del Foco:** Al eliminar una imagen mediante el teclado, la aplicación detecta la posición del elemento y desplaza automáticamente el foco a la siguiente tarjeta (o a la anterior si es la última). Además, el estado de foco es **visualmente idéntico al hover**, activando el escalado, la elevación y el panel de información para una experiencia navegable y coherente.
 - **Semántica:** Uso de etiquetas HTML5 semánticas (`article`, `section`, `button`).
 - **Lectores de Pantalla:** Atributos `aria-label` descriptivos para acciones dinámicas y `aria-live` para estados de carga.
 
