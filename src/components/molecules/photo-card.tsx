@@ -11,8 +11,14 @@ interface PhotoCardProps {
 
 const PhotoCardComponent = ({ photo, onRemove }: PhotoCardProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
+
   const handleRemove = () => {
-    onRemove(photo.id);
+    if (isDeleting) return;
+    setIsDeleting(true);
+    setTimeout(() => {
+      onRemove(photo.id);
+    }, 500);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -28,7 +34,11 @@ const PhotoCardComponent = ({ photo, onRemove }: PhotoCardProps) => {
       tabIndex={0}
       role="button"
       aria-label={`Eliminar imagen ${photo.title}`}
-      className="group relative rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-500 cursor-pointer focus:outline-none focus:ring-4 focus:ring-blue-500 hover:scale-105 bg-gray-100 aspect-square"
+      className={`group relative rounded-lg overflow-hidden shadow-sm hover:shadow-md cursor-pointer focus:outline-none focus:ring-4 focus:ring-blue-500 bg-gray-100 aspect-square transition-all duration-500 transform ${
+        isDeleting
+          ? "scale-0 opacity-0"
+          : "scale-100 opacity-100 hover:scale-105"
+      }`}
     >
       <Image
         src={photo.url}
@@ -40,13 +50,8 @@ const PhotoCardComponent = ({ photo, onRemove }: PhotoCardProps) => {
           isLoaded ? "opacity-100" : "opacity-0"
         }`} // onError={() => setImageError(true)}
       />
-      {/* <div className="absolute inset-0 bg-red-500/0 group-hover:bg-red-500/20 transition-colors duration-300 flex items-center justify-center">
-        <span className="opacity-0 group-hover:opacity-100 text-white font-medium bg-red-600 px-3 py-1 rounded-full text-sm shadow-lg transform scale-95 group-hover:scale-100 transition-all">
-          Eliminar
-        </span>
-      </div> */}
     </article>
   );
 };
 
-export const PhotoCard = memo(PhotoCardComponent)
+export const PhotoCard = memo(PhotoCardComponent);
