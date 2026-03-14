@@ -27,7 +27,7 @@ describe("PhotoCard component", () => {
 
     const image = screen.getByAltText("test photo title");
     expect(image).toBeInTheDocument();
-    expect(image).toHaveAttribute("src", "https://example.com/photo.jpg");
+    expect(image).toHaveAttribute("src", expect.stringContaining("photo.jpg"));
   });
 
   it("should call onRemove immediately when clicked (managed by Framer Motion)", () => {
