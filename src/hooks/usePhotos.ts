@@ -9,51 +9,51 @@ export const usePhotos = () => {
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
 
-  const fetchPhotos = async (currentPage: number) => {
-    try {
-      const response = await fetch(
-        `https://jsonplaceholder.typicode.com/photos?_page=${currentPage}&_limit=20`,
-      );
-
-      if (!response.ok) {
-        throw new Error(`Error HTTP: ${response.status}`);
-      }
-
-      const data: Photo[] = await response.json();
-
-      if (data.length === 0) {
-        setHasMore(false);
-        return;
-      } else {
-        const fixedData = data.map((photo) => ({
-          ...photo,
-          url:
-            photo.url.replace("via.placeholder.com", "placehold.co") +
-            "/FFF.png",
-          thumbnailUrl:
-            photo.thumbnailUrl.replace(
-              "via.placeholder.com",
-              "placehold.co",
-            ) + "/FFF.png",
-        }));
-        setPhotos((currentPhotos) => [...currentPhotos, ...fixedData]);
-      }
-    } catch (error) {
-      setError(
-        error instanceof Error
-          ? error.message
-          : "Error desconocido al cargar las fotos",
-      );
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   useEffect(() => {
+    const fetchPhotos = async (currentPage: number) => {
+      try {
+        const response = await fetch(
+          `https://jsonplaceholder.typicode.com/photos?_page=${currentPage}&_limit=20`,
+        );
+
+        if (!response.ok) {
+          throw new Error(`Error HTTP: ${response.status}`);
+        }
+
+        const data: Photo[] = await response.json();
+
+        if (data.length === 0) {
+          setHasMore(false);
+          return;
+        } else {
+          const fixedData = data.map((photo) => ({
+            ...photo,
+            url:
+              photo.url.replace("via.placeholder.com", "placehold.co") +
+              "/FFF.png",
+            thumbnailUrl:
+              photo.thumbnailUrl.replace(
+                "via.placeholder.com",
+                "placehold.co",
+              ) + "/FFF.png",
+          }));
+          setPhotos((currentPhotos) => [...currentPhotos, ...fixedData]);
+        }
+      } catch (error) {
+        setError(
+          error instanceof Error
+            ? error.message
+            : "Error desconocido al cargar las fotos",
+        );
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
     if (hasMore) {
       fetchPhotos(page);
     }
-  }, [page]);
+  }, [page, hasMore]);
 
   const loadMore = useCallback(() => {
     if (!isLoading && hasMore) {
@@ -62,7 +62,9 @@ export const usePhotos = () => {
   }, [isLoading, hasMore]);
 
   const removePhoto = useCallback((id: number) => {
-    setPhotos((currentPhotos) => currentPhotos.filter((photo) => photo.id !== id));
+    setPhotos((currentPhotos) =>
+      currentPhotos.filter((photo) => photo.id !== id),
+    );
   }, []);
 
   return { photos, isLoading, error, removePhoto, loadMore, hasMore };

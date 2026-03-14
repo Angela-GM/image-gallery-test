@@ -9,7 +9,7 @@ interface PhotoCardProps {
   onRemove: (id: number) => void;
 }
 
-export const PhotoCardComponent = ({ photo, onRemove }: PhotoCardProps) => {
+const PhotoCardComponent = ({ photo, onRemove }: PhotoCardProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const handleRemove = () => {
     onRemove(photo.id);
