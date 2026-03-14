@@ -20,9 +20,10 @@ const PhotoCardComponent = ({ photo, onRemove }: PhotoCardProps) => {
       onRemove(photo.id);
     }, 500);
   };
-
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter") {
+  // funcion borrar por teclado
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLElement>) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
       handleRemove();
     }
   };
