@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "@/constants";
 import { Photo } from "@/types/photo";
 import { useCallback, useEffect, useState } from "react";
 
@@ -15,7 +16,7 @@ export const usePhotos = () => {
       setIsLoading(true);
       try {
         const response = await fetch(
-          `https://jsonplaceholder.typicode.com/photos?_page=${currentPage}&_limit=20`,
+          `${API_BASE_URL}/photos?_page=${currentPage}&_limit=20`,
         );
 
         if (!response.ok) {
