@@ -9,7 +9,7 @@ interface PhotoGridProps {
 
 export const PhotoGrid = ({ photos, onRemove }: PhotoGridProps) => {
   return (
-   <section className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 w-full">
+    <section className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-10 w-full p-6">
       <AnimatePresence mode="popLayout">
         {photos.map((photo) => (
           <motion.div

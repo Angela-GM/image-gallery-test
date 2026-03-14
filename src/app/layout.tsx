@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Prueba Técnica EY - Frontend Next - Angela Garcia",
+  title: "Galería de imágenes",
   description: "Prueba Técnica EY - Frontend Next - Angela Garcia",
 };
 
