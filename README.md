@@ -1,6 +1,6 @@
-# Galería de Fotos - Challenge EY 🚀
+# Galería de Imágenes - Challenge EY 🚀
 
-Este proyecto es una aplicación de galería de fotos con scroll infinito. Se ha puesto especial énfasis en la **Clean Architecture**, el rendimiento del DOM y una experiencia de usuario (UX) fluida y accesible.
+Este proyecto es una aplicación de galería de imágenes con scroll infinito. Se ha puesto especial énfasis en la **Clean Architecture**, el rendimiento del DOM y una experiencia de usuario (UX) fluida y accesible.
 
 ## 🛠️ Stack Tecnológico & Justificación
 
