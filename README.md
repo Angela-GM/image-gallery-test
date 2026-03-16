@@ -3,8 +3,8 @@
 Este proyecto es una aplicación de galería de imágenes con scroll infinito. Se ha puesto especial énfasis en la **Clean Architecture**, el rendimiento del DOM y una experiencia de usuario (UX) fluida y accesible.
 
 ## 🔗 Demo en Vivo
-Puedes ver la aplicación desplegada en: [https://image-gallery-test.vercel.app/](https://image-gallery-test.vercel.app/)
 
+Puedes ver la aplicación desplegada en: [https://image-gallery-test.vercel.app/](https://image-gallery-test.vercel.app/)
 
 ## 🛠️ Stack Tecnológico & Justificación
 
@@ -25,6 +25,20 @@ El proyecto sigue los principios de **Atomic Design** para organizar la interfaz
 - **Molecules:** Combinación de átomos (`PhotoCard`, `ErrorMessage`).
 - **Organisms:** Secciones complejas (`PhotoGrid`, `Gallery`).
 - **Hooks:** Extracción de lógica de negocio (`usePhotos`) para facilitar el mantenimiento y testing.
+
+## 📂 Estructura del Proyecto
+
+```text
+src/
+├── app/              # Rutas y configuración de Next.js (App Router)
+├── components/       # Componentes organizados por Atomic Design
+│   ├── atoms/        # Spinner, ButtonPrimary
+│   ├── molecules/    # PhotoCard, ErrorMessage
+│   └── organisms/    # PhotoGrid, Gallery
+├── hooks/            # Custom Hooks (usePhotos)
+├── types/            # Definiciones de TypeScript
+└── tests/            # Mocks y configuración adicional de testing
+```
 
 ## 🚀 Decisiones de Arquitectura y Rendimiento
 
@@ -48,18 +62,20 @@ Se optó por **Framer Motion** para gestionar las transiciones de la cuadrícula
 
 ---
 
-
 ## 🛠️ Cómo arrancar el proyecto
 
 Sigue estos pasos para ejecutar la aplicación en tu entorno local:
 
 ### 🚀 Opción Recomendada (Un solo paso)
+
 Para instalar dependencias, construir y arrancar el proyecto de una sola vez:
+
 ```bash
 npm run start:full
 ```
 
 ### 🛠️ Otras opciones
+
 1. **Instalar dependencias:**
    ```bash
    npm install
@@ -70,21 +86,18 @@ npm run start:full
    ```
    La aplicación estará disponible en `http://localhost:3000`
 
-   La aplicación estará disponible en `http://localhost:3000`
-
 ### 🔑 Variables de Entorno
+
 La aplicación utiliza una variable para centralizar el endpoint de la API. **No es obligatorio configurar nada** para que el proyecto funcione, ya que existe un valor por defecto automatizado.
 
 Si deseas cambiar la fuente de datos, crea un archivo `.env` en la raíz:
 
 ```env
-NEXT_PUBLIC_ENDPOINT_BASE="https://jsonplaceholder.typicode.com"
+NEXT_PUBLIC_API_URL="https://jsonplaceholder.typicode.com"
 ```
 
 > [!TIP]
 > El proyecto está diseñado para funcionar "out-of-the-box". Si el archivo `.env` no existe, se usará automáticamente el endpoint de JSONPlaceholder.
-
-
 
 ## 🧪 Testing (Unitarios e Integración)
 
@@ -114,7 +127,7 @@ npm run test:watch  # Modo observación
 De acuerdo con los requisitos de la prueba, este proyecto ha contado con el apoyo de herramientas de IA, integradas en el flujo de trabajo de la siguiente manera:
 
 - **GitHub Copilot:** Utilizado en el IDE principalmente para la predicción de texto y autocompletado de código repetitivo, agilizando el desarrollo mecánico.
-- **Chat Gemini como Consultor Senior:** Se ha empleado una IA generativa como consejera para organizar la arquitectura del proyecto, plantear la estructura de la prueba de la mejor forma posible y resolver bloqueos técnicos complejos además de ayudarme a redactar el README.
+- **Chat Gemini como Consultor Senior:** Se ha empleado una IA generativa como consejera para organizar la arquitectura del proyecto, plantear la estructura de la prueba de la mejor forma posible y resolver bloqueos técnicos complejos, como apoyo en la documentación técnica y optimización de la redacción del README.
 
 **Responsabilidad y Supervisión:**
 Es importante destacar que **todo el código y las soluciones propuestas han sido revisados, probados y validados por mí**. La IA ha servido como apoyo estratégico, pero la comprensión profunda de la lógica implementada, la corrección de errores de renderizado y la validación de los tests han sido ejecutadas bajo mi supervisión directa, asegurando que cada línea de código cumple con los estándares requeridos.
@@ -125,6 +138,3 @@ Es importante destacar que **todo el código y las soluciones propuestas han sid
 2. **Debugging de Layout:** Resolución de problemas de _Reflow_ y parpadeos visuales durante el scroll infinito masivo.
 3. **Testing:** Configuración del entorno de Jest y creación de mocks para APIs del navegador (como `IntersectionObserver`).
 4. **Optimización:** Implementación de estrategias de reconciliación del Virtual DOM para mejorar la fluidez.
-
-
-
