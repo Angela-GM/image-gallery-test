@@ -13,6 +13,8 @@ export const Gallery = () => {
   const observerTarget = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const currentTarget = observerTarget.current;
+    
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting && hasMore && !isLoading && !error) {
@@ -22,15 +24,15 @@ export const Gallery = () => {
       { rootMargin: "0px 0px 400px 0px", threshold: 0 },
     );
 
-    if (observerTarget.current) {
-      observer.observe(observerTarget.current);
+    if (currentTarget) {
+      observer.observe(currentTarget);
     }
     return () => {
-      if (observerTarget.current) {
-        observer.unobserve(observerTarget.current);
+      if (currentTarget) {
+        observer.unobserve(currentTarget);
       }
     };
-  }, [loadMore, hasMore, isLoading]);
+  }, [loadMore, hasMore, isLoading, error]);
 
   if (error && photos.length === 0) return <ErrorMessage message={error} />;
 

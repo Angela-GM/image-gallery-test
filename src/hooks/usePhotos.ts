@@ -29,6 +29,8 @@ export const usePhotos = () => {
           setHasMore(false);
           return;
         } else {
+          // Transformamos las URLs de via.placeholder.com (que no funcionan) a placehold.co
+          // Añadimos /FFF.png para el color del texto y evitar 404s
           const fixedData = data.map((photo) => ({
             ...photo,
             url:

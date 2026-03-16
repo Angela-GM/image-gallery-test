@@ -21,6 +21,7 @@ describe("Gallery Integration", () => {
       removePhoto: jest.fn(),
       loadMore: jest.fn(),
       hasMore: true,
+      retry: jest.fn(),
     });
 
     render(<Gallery />);
@@ -36,6 +37,7 @@ describe("Gallery Integration", () => {
       removePhoto: jest.fn(),
       loadMore: jest.fn(),
       hasMore: true,
+      retry: jest.fn(),
     });
 
     render(<Gallery />);
